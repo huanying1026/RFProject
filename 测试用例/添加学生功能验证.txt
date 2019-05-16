@@ -1,0 +1,28 @@
+*** Settings ***
+Resource          ../对象仓库/MemberCenter/StudentListPage.txt
+Resource          ../对象仓库/MemberCenter/AddStudentPage/AddStudentPage.txt
+Resource          ../公共类库/浏览器模块.txt
+
+*** Test Cases ***
+添加学生验证
+    [Setup]    删除MySQL数据    18585687749
+    打开浏览器    http://localhost/admin.php
+    登录操作    admin    admin
+    点击会员中心按钮
+    点击学生列表链接
+    切换表单    id=mainframe
+    点击添加学员按钮
+    输入用户账号    13611111125
+    输入昵称    test010
+    输入用户密码    123456
+    选择性别    男
+    选择角色    全部开放
+    #上传头像    E:\\ZM_AutoTest20171217\\RFS\\EDU_AUTO_TEST\\2.对象仓库\\MemberCenter\\StudentList\\upload\\f_center_03.jpg
+    输入邮箱地址    zhangsan11@163.com
+    输入手机号码    18585687749
+    点击确认保存按钮
+    点击弹窗确认按钮
+    点击返回按钮
+    新添加学生信息检查    18585687749
+    关闭浏览器
+    [Teardown]    用例运行错误时调用

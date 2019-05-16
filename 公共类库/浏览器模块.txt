@@ -1,0 +1,44 @@
+*** Settings ***
+Library           Selenium2Library
+Resource          ../对象仓库/LoginPage.txt
+
+*** Keywords ***
+打开浏览器
+    [Arguments]    ${url}
+    [Tags]    浏览器
+    Open Browser    ${url}    gc
+
+窗口最大化
+    [Tags]    浏览器
+    Maximize Browser Window
+
+退出浏览器
+    [Tags]    浏览器
+    Sleep    2
+    Close Browser
+
+浏览器全局等待时间
+    [Arguments]    ${op_time}=20
+    [Tags]    浏览器
+    Set Browser Implicit Wait    ${op_time}
+
+浏览器强制等待时间
+    [Arguments]    ${time}
+    Sleep    ${time}
+
+设置步骤等待时间
+    [Arguments]    ${loc}    ${text}
+    Wait Until Element Contains    ${loc}    ${text}    10
+
+用例运行错误时调用
+    Run Keyword If Test Failed    Close Browser
+
+切换表单
+    [Arguments]    ${frame_loc}
+    Wait Until Element Is Enabled    ${loc}
+    Select Frame    ${loc}
+
+点击弹窗确认按钮
+    sleep    3
+    Confirm Action
+    Choose Ok On Next Confirmation

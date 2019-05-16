@@ -1,0 +1,3 @@
+*** Settings ***
+Resource          ../对象仓库/LoginPage.txt
+Resource          ../公共类库/浏览器模块.txt

@@ -1,0 +1,81 @@
+*** Variables ***
+${ipt_useraccount_loc}    id=username    # 用户账号
+${ipt_userrealname_loc}    id=realname    # 用户昵称
+${ipt_userpwd_loc}    id=password    # 用户密码
+${radio_usersex_loc}    sex    # 用户性别
+${select_userrole_loc}    xpath=//*[@id="form"]/div/div[5]/div/select    # 用户角色
+${check_isstarlearner_loc}    id=isstart    # 是否明星学员
+${ipt_userpicture_loc}    xpath=//*[@id="form"]/div/div[7]/div/a/span    # 学员头像
+${ipt_usertype_loc}    id=startname    # 学员类型
+${ipt_studytime_loc}    id=studytime    # 学习时间
+${ipt_cursecount_loc}    id=studynum    # 报名课程数
+${select_chose_agency_loc}    id=oneCategory    # 选择机构
+${ipt_user_email_loc}    id=email    # 用户邮箱
+${ipt_user_phone_loc}    id=phone    # 用户手机
+${select_province_loc}    xpath=.//*[@id='form']/div/div[14]/div/select[1]    # '省'下拉菜单元素定位
+${select_city_loc}    xpath=.//*[@id='form']/div/div[14]/div/select[2]    # '市'下拉菜单元素定位
+${select_area_loc}    xpath=.//*[@id='form']/div/div[14]/div/select[3]    # '区'下拉菜单元素定位
+${ipt_user_address_loc}    id=address    # 详细地址
+${ipt_user_introduce_loc}    id=introduce    # 个人简介
+${btn_confirm_loc}    id=btn_sub    # '确认保存'按钮元素定位
+${btn_comeback_loc}    xpath=html/body/div[2]/h3/a
+
+*** Keywords ***
+输入用户账号
+    [Arguments]    ${username}
+    Wait Until Element Is Visible link=返回列表
+    Input Text    ${ipt_useraccount_loc}    ${username}
+
+输入昵称
+    [Arguments]    ${realname}
+    Input Text ${ipt_userrealname_loc}    ${realname}
+
+输入用户密码
+    [Arguments]    ${password}
+    Input Password    ${ipt_userrealname_loc} ${password}
+
+选择性别
+    [Arguments]    ${sex}
+    Run Keyword If    '${sex}'=='男' Select Radio Button    ${radio_usersex_loc}    1
+    ...    ELSE IF    '${sex}'=='女'    Select Radio Button    ${radio_usersex_loc}    0
+    ... ELSE    Select Radio Button    ${radio_usersex_loc}    2
+
+选择角色
+    [Arguments]    ${role}
+    Select From List    ${select_userrole_loc}    ${role}
+
+选择明星学员
+    Select Checkbox    ${check_isstarlearner_loc}
+
+上传头像
+    [Arguments]    ${img_path}
+    Click Element    link=上传头像
+    Click Element xpath=html/body/div[3]/div[1]/div[2]/div/div[1]/ul/li[2]
+    Input Text    xpath=//input[@type='file' and @name='imgFile']    ${img_path}
+    Click Element    xpath=html/body/div[3]/div[1]/div[3]/span[1]/input
+
+输入邮箱地址
+    [Arguments]    ${mail}
+    Input Text    ${ipt_user_email_loc}    ${mail}
+
+输入手机号码
+    [Arguments]    ${phone}
+    Input Text    ${ipt_user_phone_loc}    ${phone}
+
+输入详细地址
+    [Arguments]    ${address}
+    Input Text    ${ipt_user_address_loc}    ${address}
+
+输入个人简介
+    [Arguments]    ${introduce}
+    Input Text    ${ipt_user_introduce_loc}    ${introduce}
+
+点击确认保存
+    Click Element    ${btn_confirm_loc}
+
+新添加学生信息检查
+    [Arguments]    ${expect}
+    Table Row Should Contain    xpath=html/body/div[2]/div/table    2    ${expect}
+
+点击返回按钮
+    Click Element    ${btn_comeback_loc}

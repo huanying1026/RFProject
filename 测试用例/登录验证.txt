@@ -1,0 +1,22 @@
+*** Settings ***
+Resource          ../公共类库/浏览器模块.txt
+Resource          ../对象仓库/LoginPage.txt
+
+*** Test Cases ***
+成功登录验证
+    登录成功模板    http://localhost/admin.php    admin    admin
+    [Teardown]    用例运行错误时调用
+
+*** Keywords ***
+登录成功模板
+    [Arguments]    ${url}    ${name}    ${pwd}
+    打开浏览器    ${url}
+    窗口最大化
+    浏览器全局等待时间
+    账号输入    ${name}
+    密码输入    ${pwd}
+    登录按钮提交
+    验证登录成功
+    浏览器强制等待时间    3
+    退出浏览器
+    [Teardown]

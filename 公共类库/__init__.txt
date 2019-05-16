@@ -1,0 +1,10 @@
+*** Keywords ***
+登录操作
+    [Arguments]    ${username}    ${userpwd}
+    打开浏览器    http://localhost.admin.php
+    窗口最大化
+    浏览器运行时间
+    账号输入    ${username}
+    密码输入    ${userpwd}
+    登录按钮提交
+    验证登录成功

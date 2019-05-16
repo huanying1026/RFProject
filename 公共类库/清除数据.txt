@@ -1,0 +1,8 @@
+*** Settings ***
+Library           ../系统模块/ShareModules.py
+
+*** Keywords ***
+删除MySQL原数据
+    [Arguments]    ${old_data}
+    DeleteMySQLData_P    127.0.0.1    ${3306}    edu    edu    edu    xsmart_users
+    ...    delete form xsmart_users where username = ${number}

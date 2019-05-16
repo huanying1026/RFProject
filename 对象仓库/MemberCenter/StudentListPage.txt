@@ -1,0 +1,19 @@
+*** Settings ***
+Library           Selenium2Library
+
+*** Variables ***
+${mc_loc}         xpath=//*[@id="header"]/ul/li[3]/a    # 会员中心
+${lnk_studentlist_loc}    link=学生列表
+${btn_addstu_loc}    xpath=/html/body/div[2]/h3/a[2]/span    # 添加学生按钮元素定位
+${msg_phone_number_loc}    xpath=.//*[@id='recordList']/tr[1]/td[2]
+${lnk_logout_loc}    xpath=.//*[@id='header']/p/a[3]
+
+*** Keywords ***
+点击会员中心
+    Click Element    ${mc_loc}
+
+点击学生列表链接
+    Click Link    ${lnk_studentlist_loc}
+
+点击添加学生
+    Click Button    ${btn_addstu_loc}

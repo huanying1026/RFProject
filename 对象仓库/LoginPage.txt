@@ -1,0 +1,23 @@
+*** Settings ***
+Library           Selenium2Library
+
+*** Variables ***
+${ipt_name_loc}    id=username    # 账号输入框元素定位
+${ipt_pwd_loc}    id=password    # 密码输入框元素定位
+${btn_submit_loc}    css=#loginFrm > input    # 提交按钮元素定位
+${msg_loginsucc_loc}    xpath=//*[@id="header"]/p/span[1]/strong    # 登录成功信息验证元素定位
+
+*** Keywords ***
+账号输入
+    [Arguments]    ${name_val}
+    Input Text    ${ipt_name_loc}    ${name_val}
+
+密码输入
+    [Arguments]    ${pwd_val}
+    Input Password    ${ipt_pwd_loc}    ${pwd_val}
+
+登录按钮提交
+    Click Element    ${btn_submit_loc}
+
+验证登录成功
+    Page Should Contain Element    ${msg_loginsucc_loc}
